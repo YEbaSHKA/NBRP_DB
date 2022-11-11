@@ -7,6 +7,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+require "faker"
+
 Subscription.delete_all
 BooksGenre.delete_all
 BooksAuthor.delete_all
@@ -32,3 +34,49 @@ subscribers = Subscriber.all
 11.times { BooksGenre.create(book: books[rand(0..10)], genre: genres[rand(0..10)]) }
 
 11.times { Subscription.create(subscriber: subscribers[rand(0..10)], book: books[rand(0..10)], start: Date.new(2022, 2, 3), finish: Date.new(2022, 3, 4), is_active: rand(2) == 1 ? true : false) }
+
+100.times do
+  authors = Author.new(
+    name: Faker::Book.author
+  )
+
+  genres = Genre.new(
+    name: Faker::Book.genre
+  )
+
+  books = Book.new(
+    name: Faker::Book.title,
+    year: Faker::Number.between(from: 1500, to: 2022) ,
+    quantity: Faker::Number.between(from: 1, to: 100) 
+  )
+
+  subscribers = Subscriber.new(
+    name: Faker::Name.name
+  )
+  
+  books_authors = BooksAuthor.new(
+    book: books,
+    author: authors
+  )
+
+  books_genres = BooksGenre.new(
+    book: books,
+    genre: genres
+  )
+
+  subscriptions = Subscription.new(
+    subscriber: subscribers,
+    book: books,
+    start: Faker::Date.between(from: '2020-01-01', to: '2022-11-11'),
+    finish: Faker::Date.between(from: '2020-02-01', to: '2022-12-11'),
+    is_active: Faker::Boolean.boolean
+  )
+
+  authors.save
+  genres.save
+  books.save
+  subscribers.save
+  books_authors.save
+  books_genres.save
+  subscriptions.save
+end
