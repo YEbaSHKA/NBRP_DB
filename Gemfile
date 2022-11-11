@@ -73,6 +73,7 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'main'
