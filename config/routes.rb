@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :add_not_null_constraint_to_genres_names
   resources :subscriptions
   resources :subscribs
   resources :subscribtions

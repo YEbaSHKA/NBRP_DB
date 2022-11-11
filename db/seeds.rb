@@ -7,7 +7,7 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-require "faker"
+require 'faker'
 
 Subscription.delete_all
 BooksGenre.delete_all
@@ -27,13 +27,16 @@ Subscriber.delete_all
 authors = Author.all
 books = Book.all
 genres = Genre.all
-subscribers = Subscriber.all 
+subscribers = Subscriber.all
 
 11.times { BooksAuthor.create(book: books[rand(0..10)], author: authors[rand(0..10)]) }
 
 11.times { BooksGenre.create(book: books[rand(0..10)], genre: genres[rand(0..10)]) }
 
-11.times { Subscription.create(subscriber: subscribers[rand(0..10)], book: books[rand(0..10)], start: Date.new(2022, 2, 3), finish: Date.new(2022, 3, 4), is_active: rand(2) == 1 ? true : false) }
+11.times do
+  Subscription.create(subscriber: subscribers[rand(0..10)], book: books[rand(0..10)], start: Date.new(2022, 2, 3),
+                      finish: Date.new(2022, 3, 4), is_active: rand(2) == 1)
+end
 
 100.times do
   authors = Author.new(
@@ -46,14 +49,14 @@ subscribers = Subscriber.all
 
   books = Book.new(
     name: Faker::Book.title,
-    year: Faker::Number.between(from: 1500, to: 2022) ,
-    quantity: Faker::Number.between(from: 1, to: 100) 
+    year: Faker::Number.between(from: 1500, to: 2022),
+    quantity: Faker::Number.between(from: 1, to: 100)
   )
 
   subscribers = Subscriber.new(
     name: Faker::Name.name
   )
-  
+
   books_authors = BooksAuthor.new(
     book: books,
     author: authors
@@ -64,11 +67,13 @@ subscribers = Subscriber.all
     genre: genres
   )
 
+  date = Faker::Date.between(from: '2020-01-01', to: '2022-11-11')
+
   subscriptions = Subscription.new(
     subscriber: subscribers,
     book: books,
-    start: Faker::Date.between(from: '2020-01-01', to: '2022-11-11'),
-    finish: Faker::Date.between(from: '2020-02-01', to: '2022-12-11'),
+    start: date,
+    finish: date + 1.month,
     is_active: Faker::Boolean.boolean
   )
 

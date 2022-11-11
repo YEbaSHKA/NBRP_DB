@@ -1,49 +1,51 @@
-require "application_system_test_case"
+# frozen_string_literal: true
+
+require 'application_system_test_case'
 
 class SubscriptionsTest < ApplicationSystemTestCase
   setup do
     @subscription = subscriptions(:one)
   end
 
-  test "visiting the index" do
+  test 'visiting the index' do
     visit subscriptions_url
-    assert_selector "h1", text: "Subscriptions"
+    assert_selector 'h1', text: 'Subscriptions'
   end
 
-  test "should create subscription" do
+  test 'should create subscription' do
     visit subscriptions_url
-    click_on "New subscription"
+    click_on 'New subscription'
 
-    fill_in "Book", with: @subscription.book_id
-    fill_in "Finish", with: @subscription.finish
-    check "Is active" if @subscription.is_active
-    fill_in "Start", with: @subscription.start
-    fill_in "Subscriber", with: @subscription.subscriber_id
-    click_on "Create Subscription"
+    fill_in 'Book', with: @subscription.book_id
+    fill_in 'Finish', with: @subscription.finish
+    check 'Is active' if @subscription.is_active
+    fill_in 'Start', with: @subscription.start
+    fill_in 'Subscriber', with: @subscription.subscriber_id
+    click_on 'Create Subscription'
 
-    assert_text "Subscription was successfully created"
-    click_on "Back"
+    assert_text 'Subscription was successfully created'
+    click_on 'Back'
   end
 
-  test "should update Subscription" do
+  test 'should update Subscription' do
     visit subscription_url(@subscription)
-    click_on "Edit this subscription", match: :first
+    click_on 'Edit this subscription', match: :first
 
-    fill_in "Book", with: @subscription.book_id
-    fill_in "Finish", with: @subscription.finish
-    check "Is active" if @subscription.is_active
-    fill_in "Start", with: @subscription.start
-    fill_in "Subscriber", with: @subscription.subscriber_id
-    click_on "Update Subscription"
+    fill_in 'Book', with: @subscription.book_id
+    fill_in 'Finish', with: @subscription.finish
+    check 'Is active' if @subscription.is_active
+    fill_in 'Start', with: @subscription.start
+    fill_in 'Subscriber', with: @subscription.subscriber_id
+    click_on 'Update Subscription'
 
-    assert_text "Subscription was successfully updated"
-    click_on "Back"
+    assert_text 'Subscription was successfully updated'
+    click_on 'Back'
   end
 
-  test "should destroy Subscription" do
+  test 'should destroy Subscription' do
     visit subscription_url(@subscription)
-    click_on "Destroy this subscription", match: :first
+    click_on 'Destroy this subscription', match: :first
 
-    assert_text "Subscription was successfully destroyed"
+    assert_text 'Subscription was successfully destroyed'
   end
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class SubscriptionsController < ApplicationController
-  before_action :set_subscription, only: %i[ show edit update destroy ]
+  before_action :set_subscription, only: %i[show edit update destroy]
 
   # GET /subscriptions or /subscriptions.json
   def index
@@ -7,8 +9,7 @@ class SubscriptionsController < ApplicationController
   end
 
   # GET /subscriptions/1 or /subscriptions/1.json
-  def show
-  end
+  def show; end
 
   # GET /subscriptions/new
   def new
@@ -16,8 +17,7 @@ class SubscriptionsController < ApplicationController
   end
 
   # GET /subscriptions/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /subscriptions or /subscriptions.json
   def create
@@ -25,7 +25,7 @@ class SubscriptionsController < ApplicationController
 
     respond_to do |format|
       if @subscription.save
-        format.html { redirect_to subscription_url(@subscription), notice: "Subscription was successfully created." }
+        format.html { redirect_to subscription_url(@subscription), notice: 'Subscription was successfully created.' }
         format.json { render :show, status: :created, location: @subscription }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class SubscriptionsController < ApplicationController
   def update
     respond_to do |format|
       if @subscription.update(subscription_params)
-        format.html { redirect_to subscription_url(@subscription), notice: "Subscription was successfully updated." }
+        format.html { redirect_to subscription_url(@subscription), notice: 'Subscription was successfully updated.' }
         format.json { render :show, status: :ok, location: @subscription }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +52,20 @@ class SubscriptionsController < ApplicationController
     @subscription.destroy
 
     respond_to do |format|
-      format.html { redirect_to subscriptions_url, notice: "Subscription was successfully destroyed." }
+      format.html { redirect_to subscriptions_url, notice: 'Subscription was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_subscription
-      @subscription = Subscription.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def subscription_params
-      params.require(:subscription).permit(:subscriber_id, :book_id, :start, :finish, :is_active)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_subscription
+    @subscription = Subscription.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def subscription_params
+    params.require(:subscription).permit(:subscriber_id, :book_id, :start, :finish, :is_active)
+  end
 end
